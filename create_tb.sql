@@ -1,0 +1,28 @@
+CREATE DATABASE IF NOT EXISTS `AUDB`;
+USE AUDB;
+CREATE TABLE IF NOT EXISTS `account` (
+  `id` INT unsigned NOT NULL AUTO_INCREMENT,
+  `account` VARCHAR(64) NOT NULL,
+  `password` VARCHAR(64) NOT NULL,
+  `role` INT unsigned NOT NULL,
+  PRIMARY KEY (`id`)
+);
+
+LOAD DATA LOCAL INFILE '//home/p4/Downloads/SDN-Final-master/account.csv' INTO TABLE AUDB.account
+FIELDS TERMINATED BY ',' ENCLOSED BY '' ESCAPED BY '\\'
+LINES TERMINATED BY '\n' STARTING BY ''
+IGNORE 1 LINES;
+
+
+CREATE TABLE IF NOT EXISTS `macpool` (
+    `id` INT unsigned NOT NULL AUTO_INCREMENT,
+    `mac` BIGINT unsigned NOT NULL UNIQUE KEY,
+    `ac_id` INT unsigned NOT NULL,
+    `role` INT unsigned,
+    PRIMARY KEY (`id`)
+);
+
+LOAD DATA LOCAL INFILE '/home/p4/Downloads/SDN-Final-master/macpool.csv' INTO TABLE AUDB.macpool
+FIELDS TERMINATED BY ',' ENCLOSED BY '' ESCAPED BY '\\'
+LINES TERMINATED BY '\n' STARTING BY ''
+IGNORE 1 LINES;

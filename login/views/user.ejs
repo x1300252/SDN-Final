@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<head>
+  <title>Login</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <div class="container text-center"  style="width:500px; position: absolute; top: 50%; left: 50%; transform: translateX(-50%) translateY(-50%);">
+        <% if (status==0) {%>
+            <h1> Error </h1>
+        <%} else { %>
+            <h1> Welecome <%= user %></h1>
+            <% if (role==0) {%>
+                <table  class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">id</th>
+                            <th scope="col">user name</th>
+                            <th scope="col">role</th>
+                            <th scope="col">mac addr</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% for ( var i = 0 ; i < data.length ; i++){ %>
+                            <tr>
+                                <th scope="row">
+                                    <%= i+1  %>
+                                </th>
+                                <td>
+                                    <%= data[i].account  %>
+                                </td>
+                                <% if (data[i].role==0) {%> <td>admin</td>
+                                <%} else if (data[i].role==1) {%> <td>normal</td>
+                                <%} else {%> <td>guest</td>
+                                <%}%>
+                                <td>
+                                    <%= data[i].mac.toString(16).match(/.{1,2}/g).reverse().join(':')  %>
+                                </td>
+                            </tr>
+                        <% } %>
+                    </tbody>
+                </table>
+            <%} else if(role==2){ %>
+                <p></p>
+            <%}%>
+        <%}%>
+    </div>
+</body>
+</html>
